@@ -1,10 +1,10 @@
 /*
  ============================================================================
- Name        : HelloW.c
- Author      : Nicolin
- Version     :
- Copyright   : Your copyright notice
- Description : Hello World in C, Ansi-style
+ Name        : server.c
+ Author      : Nicolin Damalja, Gianluca Calò
+ Version     : 1.0.0
+ Copyright   : None
+ Description : Esonero TCP Server, C Ansi-style
  ============================================================================
  */
 
@@ -103,7 +103,7 @@ char readOperator(char* s){
 }
 
 //Main function
-int main(void) {
+int main(int argc, char* argv[])) {
     int port = PORT;
 //Initialize WinSock
 #ifdef WIN32
@@ -128,8 +128,14 @@ int main(void) {
     struct sockaddr_in localaddress;
     memset(&localaddress, 0, sizeof(localaddress));
     localaddress.sin_family = AF_INET;
-    localaddress.sin_addr.s_addr = inet_addr(IP_ADDRESS);
-    localaddress.sin_port = htons(port);
+    if (argc > 1 && argc < MAX_ARGC){
+        localaddress.sin_addr.s_addr = inet_addr(argv[1]);
+        localaddress.sin_port = htons(atoi(argv[2]));
+    } else {
+        localaddress.sin_addr.s_addr = inet_addr(IP_ADDRESS);
+        localaddress.sin_port = htons(PORT);
+    }
+
     /**
      converts values between the host and
      network byte order. Specifically, htons () converts 16 bit quantities

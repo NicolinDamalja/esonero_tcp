@@ -1,10 +1,10 @@
 /*
  ============================================================================
  Name        : clienttcp.c
- Author      : 
- Version     :
- Copyright   : Your copyright notice
- Description : Hello World in C, Ansi-style
+ Author      : Nicolin Damalja, Gianluca Calò
+ Version     : 1.0.0
+ Copyright   : None
+ Description : Esonero TCP Client, C Ansi-style
  ============================================================================
  */
 
@@ -64,7 +64,7 @@ int main(int argc, char* argv[]) {
         //Assignment ip address and port number to client Socket
         struct sockaddr_in sad;
         sad.sin_family = AF_INET;
-        if (argc > 1){
+        if (argc > 1 && argc < MAX_ARGC){
             sad.sin_addr.s_addr = inet_addr(argv[1]);
             sad.sin_port = htons(atoi(argv[2]));
         }else {
