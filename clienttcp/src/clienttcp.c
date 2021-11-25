@@ -42,7 +42,7 @@ char readOperator(char* s){
 }
 
 //Main function
-int main(int argc, char* argv[]) {
+int main(int argc, char** argv) {
 #if defined WIN32
         // Initialize Winsock
         WSADATA wsa_data;
@@ -64,7 +64,7 @@ int main(int argc, char* argv[]) {
         //Assignment ip address and port number to client Socket
         struct sockaddr_in sad;
         sad.sin_family = AF_INET;
-        if (argc > 1 && argc < MAX_ARGC){
+        if (argc > 1 && argc <= MAX_ARGC){
             sad.sin_addr.s_addr = inet_addr(argv[1]);
             sad.sin_port = htons(atoi(argv[2]));
         }else {
@@ -93,6 +93,7 @@ int main(int argc, char* argv[]) {
             int bytes_rcvd;
             int total_bytes_rcvd = 0;
             char buf[BUFFERSIZE];
+            
             char op = readOperator(input_string);
             printf("Received: ");
             while (total_bytes_rcvd < BUFFERSIZE) {
@@ -111,7 +112,7 @@ int main(int argc, char* argv[]) {
 
                 }
                 total_bytes_rcvd += bytes_rcvd;
-                buf[bytes_rcvd] = (char) "\0";
+                buf[bytes_rcvd] = 0; // End of String
                 printf("%s", buf);
             }
             printf("\n");

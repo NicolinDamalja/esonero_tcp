@@ -126,7 +126,7 @@ int main(int argc, char **argv) {
     // Assignment ip address and port number to Server Socket
     struct sockaddr_in localaddress;
 
-    memset(&localaddress, 0, sizeof(localaddress));
+    bzero(&localaddress, sizeof(localaddress));
     localaddress.sin_family = AF_INET;
 
     if (argc > 1 && argc <= MAX_ARGC){
