@@ -165,6 +165,7 @@ int main(int argc, char **argv) {
     struct sockaddr_in clientaddress; //client address struct
     int socketclient; //describer of client socket
     int clientsize; //size in byte of client address struct
+    printf("Server started at %s:%u\n", inet_ntoa(localaddress.sin_addr), htons(localaddress.sin_port));
     printf("Waiting for a client to connect...\n");
     //true while loop until is not established the connection with client
     while(1) {
